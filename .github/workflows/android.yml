@@ -19,47 +19,45 @@ jobs:
           distribution: 'temurin'
           java-version: '21'
 
-      # JRE İndirme adımlarının tamamını Amethyst-Android klasör içine hedefledim
       - name: Get JRE 8
         uses: dawidd6/action-download-artifact@v9
         with:
           workflow: build.yml
           path: Amethyst-Android/app_pojavlauncher/src/main/assets/components/jre
-          workflow_conclusion: success
           repo: AngelAuraMC/angelauramc-openjdk-build
           branch: buildjre8
           name: jre8-pojav
+          check_artifacts: true
 
       - name: Get JRE 17
         uses: dawidd6/action-download-artifact@v9
         with:
           workflow: build.yml
           path: Amethyst-Android/app_pojavlauncher/src/main/assets/components/jre-new
-          workflow_conclusion: success
           repo: AngelAuraMC/angelauramc-openjdk-build
           branch: buildjre17-21
           name: jre17-pojav
+          check_artifacts: true
 
       - name: Get JRE 21
         uses: dawidd6/action-download-artifact@v9
         with:
           workflow: build.yml
           path: Amethyst-Android/app_pojavlauncher/src/main/assets/components/jre-21
-          workflow_conclusion: success
           repo: AngelAuraMC/angelauramc-openjdk-build
           branch: buildjre17-21
           name: jre21-pojav
+          check_artifacts: true
           
       - name: Get JRE 25
         uses: dawidd6/action-download-artifact@v9
         with:
           workflow: build.yml
-          # HATA DÜZELTİLDİ: Yol Amethyst-Android içerisine yönlendirildi
           path: Amethyst-Android/app_pojavlauncher/src/main/assets/components/jre-25
-          workflow_conclusion: success 
           repo: FCL-Team/Android-OpenJDK-Build
           branch: Build_JRE_25
           name: jre25-multiarch
+          check_artifacts: true
 
       - uses: gradle/actions/setup-gradle@v4
         with:
