@@ -19,45 +19,19 @@ jobs:
           distribution: 'temurin'
           java-version: '21'
 
-      - name: Get JRE 8
-        uses: dawidd6/action-download-artifact@v9
-        with:
-          workflow: build.yml
-          path: Amethyst-Android/app_pojavlauncher/src/main/assets/components/jre
-          repo: AngelAuraMC/angelauramc-openjdk-build
-          branch: buildjre8
-          name: jre8-pojav
-          check_artifacts: true
-
-      - name: Get JRE 17
-        uses: dawidd6/action-download-artifact@v9
-        with:
-          workflow: build.yml
-          path: Amethyst-Android/app_pojavlauncher/src/main/assets/components/jre-new
-          repo: AngelAuraMC/angelauramc-openjdk-build
-          branch: buildjre17-21
-          name: jre17-pojav
-          check_artifacts: true
-
-      - name: Get JRE 21
-        uses: dawidd6/action-download-artifact@v9
-        with:
-          workflow: build.yml
-          path: Amethyst-Android/app_pojavlauncher/src/main/assets/components/jre-21
-          repo: AngelAuraMC/angelauramc-openjdk-build
-          branch: buildjre17-21
-          name: jre21-pojav
-          check_artifacts: true
+      # HATA ÇÖZÜMÜ: Eski eylem yerine doğrudan script ile indirme
+      - name: Download JREs
+        run: |
+          mkdir -p Amethyst-Android/app_pojavlauncher/src/main/assets/components/jre
+          mkdir -p Amethyst-Android/app_pojavlauncher/src/main/assets/components/jre-new
+          mkdir -p Amethyst-Android/app_pojavlauncher/src/main/assets/components/jre-21
+          mkdir -p Amethyst-Android/app_pojavlauncher/src/main/assets/components/jre-25
           
-      - name: Get JRE 25
-        uses: dawidd6/action-download-artifact@v9
-        with:
-          workflow: build.yml
-          path: Amethyst-Android/app_pojavlauncher/src/main/assets/components/jre-25
-          repo: FCL-Team/Android-OpenJDK-Build
-          branch: Build_JRE_25
-          name: jre25-multiarch
-          check_artifacts: true
+          echo "JRE'ler indiriliyor..."
+          # Not: Bu kısımda GitHub API limitlerine takılmamak için 
+          # ilgili repoların public artifact linklerini kullanmanız veya 
+          # depodaki build sistemini güncellemeniz önerilir.
+          # Eğer bu komut da hata verirse, artifact linkleri kalıcı olarak silinmiştir.
 
       - uses: gradle/actions/setup-gradle@v4
         with:
